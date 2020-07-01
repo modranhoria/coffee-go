@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+#  web:
+#    build:
+#       context: ./coffee-service
+#    ports:
+#      - "80:8080"
+#    depends_on:
+#      - backend
+  backend:
+    build:
+      context: ./coffee-service
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+  db:
+    image: "mysql:8.0.20"
+    container_name: db-container
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'coffee_db'
+      MYSQL_USER: 'coffee'
+      MYSQL_PASSWORD: 'coffee'
+      MYSQL_ROOT_PASSWORD: 'coffee'
+    ports:
+      - '3306:3306'
