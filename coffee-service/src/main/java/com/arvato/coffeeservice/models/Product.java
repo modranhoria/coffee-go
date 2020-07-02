@@ -29,7 +29,7 @@ public class Product {
     private Long quantity;
 
     @Column
-    private Float price;
+    private Long price;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItems> orderItems = new ArrayList<>();
