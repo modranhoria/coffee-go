@@ -1,13 +1,16 @@
 package com.arvato.coffeeservice.models;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
+
 import com.arvato.coffeeservice.utils.OrderStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -35,8 +38,7 @@ public class Order {
     @Column
     private OrderStatus status;
 
-    @OneToMany
-    @JoinTable(name = "order_product")
-    private List<Product> products;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItems> orderItems = new ArrayList<>();
 
 }
