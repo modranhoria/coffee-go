@@ -1,11 +1,12 @@
 package com.arvato.coffeeservice.models;
 
+import java.util.List;
+
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +22,6 @@ public class Customer {
     private User user;
 
     @OneToMany
-    @JoinTable(name = "customer_address")
+    @JoinTable(name = "customer_address", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id"))
     private List<Address> addresses;
 }
