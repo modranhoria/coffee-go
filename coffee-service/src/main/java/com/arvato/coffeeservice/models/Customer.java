@@ -22,6 +22,9 @@ public class Customer {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column
+    private String phone;
+
     @OneToMany
     @JoinTable(name = "customer_address", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id"))
     private List<Address> addresses;
