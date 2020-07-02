@@ -2,10 +2,8 @@ package com.arvato.coffeeservice.services;
 
 import com.arvato.coffeeservice.models.User;
 import com.arvato.coffeeservice.repositories.UserRepository;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,22 +14,22 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository/*, PasswordEncoder passwordEncoder*/) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-//        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> listUsers() {
         return userRepository.findAll(Sort.by("name"))
                 .stream()
-                .peek(u-> u.setPassword(null))
+                .peek(u -> u.setPassword(null))
                 .collect(Collectors.toList());
     }
 
     public void save(User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -43,8 +41,4 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
 }
