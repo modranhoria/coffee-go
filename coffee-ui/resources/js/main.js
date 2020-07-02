@@ -6,7 +6,7 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 
 	
 	$scope.refresh = function(){
-		$http.get("/getList")
+		$http.get("http://localhost:8080/users")
 		.then(function(response) {
 			$scope.list = response.data;
 		});

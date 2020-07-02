@@ -9,6 +9,8 @@ services:
       - backend
     volumes:
       - ./coffee-ui/resources:/usr/share/nginx/html
+    networks:
+      - app
   backend:
     build:
       context: ./coffee-service
@@ -16,6 +18,8 @@ services:
       - '8080:8080'
     depends_on:
       - db
+    networks:
+      - app
   db:
     image: "mysql:8.0.20"
     container_name: db-container
@@ -27,3 +31,6 @@ services:
       MYSQL_ROOT_PASSWORD: 'coffee'
     ports:
       - '3306:3306'
+
+networks:
+  app:
