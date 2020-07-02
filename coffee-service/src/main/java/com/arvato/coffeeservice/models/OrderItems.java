@@ -10,10 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "order_items")
+@Entity
 public class OrderItems {
 
-    @EmbeddedId
-    private OrderItemsId id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @ManyToOne
     @MapsId("orderId")

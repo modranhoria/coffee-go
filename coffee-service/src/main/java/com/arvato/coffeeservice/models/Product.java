@@ -1,16 +1,18 @@
 package com.arvato.coffeeservice.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "orders")
 @Entity
 public class Product {
     @Id

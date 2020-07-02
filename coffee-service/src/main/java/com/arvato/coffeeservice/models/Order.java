@@ -16,20 +16,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "orders")
+@Entity
 public class Order {
     @Id
     @GeneratedValue
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @OneToOne
-    @JoinColumn(name = "processed_by", referencedColumnName = "id")
+    @JoinColumn(name = "processed_by")
     private User processedBy;
 
     @Column(name = "processed_time")
