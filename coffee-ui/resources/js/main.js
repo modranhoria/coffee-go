@@ -4,16 +4,49 @@ var app = angular.module('myApp',
 		);
 app.controller('myCtrl', function($scope, $window, $location, $http,ModalService) {
 
-	
-	$scope.refresh = function(){
-		$http.get("http://localhost:8080/users")
-		.then(function(response) {
-			$scope.list = response.data;
-		});
+
+	$scope.students = [];
+	var empid = 1;
+	$scope.saveRecord = function(){
+		if($scope.newStudent.id == null){
+			$scope.newStudent.id = empid++;
+			$scope.students.push($scope.newStudent);
+		}else{
+			for(i in $scope.students){
+				if($scope.students[i].id == $scope.newStudent.id){
+					$scope.students[i] = $scope.newStudent;
+				}
+			}
+		}
+		$scope.newStudent={};
 	}
-	
-	$scope.refresh();
-	
+	$scope.delete = function(id){
+		for(i in $scope.students){
+			if($scope.students[i].id == id){
+				$scope.students.splice(i,1);
+				$scope.newStudent={};
+			}
+		}
+	}
+	$scope.edit = function(id){
+		for(i in $scope.students){
+			if($scope.students[i].id == id){
+				$scope.newStudent = angular.copy($scope.students[i]);
+			}
+		}
+	}
+
+
+	$scope.loadProducts = function(){
+		$http.get("http://localhost:8080/products/all")
+			.then(function(response) {
+				$scope.products = response.data;
+			});
+	}
+
+
+	$scope.loadProducts();
+
 	$scope.load = function (profile){
 		var config = {
 				headers : {
@@ -55,7 +88,21 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
  	    });
 
  	  }
-	
+
+	$scope.order = function() {
+
+		ModalService.showModal({
+			templateUrl: "/js/modal/configuration.html",
+			controller: "configurationController"
+		}).then(function(modal) {
+			modal.element.modal();
+			modal.close.then(function(result) {
+				$scope.updateConfiguration(result);
+			});
+		});
+
+	}
+
 	 $scope.configuration = function() {
 
  	    ModalService.showModal({
@@ -70,12 +117,6 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 
  	  }
 
-	$scope.select = function (){
-		for(var index in $scope.list){
-			$scope.list[index].build = !$scope.list[index].build; 
-		}
-	}
-	
 	$scope.updateConfiguration = function(configuration){
 		var config = {
 			headers : {

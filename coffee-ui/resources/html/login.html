@@ -43,85 +43,104 @@
 
 <body data-ng-app="myApp" data-ng-controller="myCtrl" data-scroll>
 <div style="padding:15px">
+	<table>
+		<thead>
+			<tr>
+				<th>
+					Build this module
+				</th>
+				<th>
+					Path
+				</th>
+				<th>
+					Maven command
+				</th>
+				<th>
+					Alternative command
+				</th>
+			</tr>
+		</thead>
+		<tbody ui-sortable ng-model="list">
+		    <tr data-ng-repeat="item in list"  class="item" style="cursor: move;">
+		      	<td>
+		      		<input type="checkbox" data-ng-model="item.build" data-ng-click="check(item)">
+		      	</td>
+		      	<td>
+		      		<input width="300px" type="text" data-ng-model="item.title" size="70">
+		      	</td>
+		      	<td>
+			      	<input width="300px" type="text" data-ng-model="item.command" size="70">
+		      	</td>
+		      	<td>
+			      	<input width="300px" type="text" data-ng-model="item.alternativeCommand" size="70">
+		      	</td>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>
+					
+				</td>
+			</tr>
+		</tfoot>
+	</table>
 
 
-	<label>Name</label>
 
-	<input type="text" name="name" ng-model="newStudent.name"/>
+	//TODO ADD HERE YOUR METHOD
 
-	<label>Address</label>
-
-	<input type="text" name="address" ng-model="newStudent.address"/>
-
-	<label>Dept.</label>
-
-	<input type="text" name="dept" ng-model="newStudent.dept"/>
-
-
-
-	<input type="hidden" ng-model="newStudent.id" />
-
-	<input type="button" value="Save" ng-click="saveRecord()" class="btn btn-primary"/>
-
-
-
-
-
-
-	<table border="1" bordercolor="blue">
-
-
-		<tr style="color:blue">
-
-
-			<th style="width:150px">Name</th>
-
-
-
-			<th style="width:150px">Address</th>
-
-
-
-			<th style="width:150px">Dept</th>
-
-
-
-			<th>Action</th>
-
-
+	<table>
+		<thead>
+		<tr>
+			<th>
+				Build this module
+			</th>
+			<th>
+				Path
+			</th>
+			<th>
+				Maven command
+			</th>
+			<th>
+				Alternative command
+			</th>
 		</tr>
-
-
-
-		<tr style="color:pink" ng-repeat="student in students">
-
-
-			<td>{{ student.name }}</td>
-
-
-
-			<td>{{ student.address }}</td>
-
-
-
-			<td>{{ student.dept }}</td>
-
-
-
+		</thead>
+		<tbody ui-sortable ng-model="products">
+		<tr data-ng-repeat="item in products"  class="item" style="cursor: move;">
+			<td>
+				<input width="300px" type="text" data-ng-model="item.id" size="70">
+			</td>
+			<td>
+				<input width="300px" type="text" data-ng-model="item.name" size="70">
+			</td>
+			<td>
+				<input width="300px" type="text" data-ng-model="item.description" size="70">
+			</td>
+			<td>
+				<input width="300px" type="text" data-ng-model="item.quantity" size="70">
+			</td>
+			<td>
+				<input width="300px" type="text" data-ng-model="item.price" size="70">
+			</td>
+		</tbody>
+		<tfoot>
+		<tr>
 			<td>
 
-				<a href="#" ng-click="edit(student.id)">edit</a> |
-
-				<a href="#" ng-click="delete(student.id)">delete</a>
-
 			</td>
-
-
 		</tr>
-
-
+		</tfoot>
 	</table>
-	</div>
+
+</div>
+<div style="padding:15px" align="right">
+	<button class="btn" data-ng-click="refresh()">Refresh</button>
+	<button class="btn" data-ng-click="saveProfile()">Save profile</button>
+	<button class="btn" data-ng-click="loadProfile()">Load profile</button>
+	<button class="btn" data-ng-click="select()"> Select</button>
+	<button class="btn" data-ng-click="build()"> Build</button>
+	<button class="btn" data-ng-click="configuration()" >Configuration</button>
+</div>
 </body>
 
 </html>

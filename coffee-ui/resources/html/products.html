@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" data-ng-integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" data-ng-crossorigin="anonymous">
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/g/jquery.ui@1.10%28jquery.ui.core.min.js+jquery.ui.widget.min.js+jquery.ui.mouse.min.js+jquery.ui.sortable.min.js%29"></script>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" data-ng-integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" data-ng-crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" data-ng-integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" data-ng-crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="/js/angular-modal-service.js"></script>
+    <script type="text/javascript" src="/js/products.js"></script>
+    <script type="text/javascript" src="/js/modal/configuration.js"></script>
+    <script type="text/javascript" src="/js/modal/saveProfile.js"></script>
+    <script type="text/javascript" src="/js/modal/loadProfile.js"></script>
+    <script type="text/javascript" src="/js/modal/loadProfile.js"></script>
+    <script type="text/javascript" src="/js/sortable.js"></script>
+
+    <style type="text/css">
+        td{
+            width: 25%;
+            padding: 5px;
+        }
+        .item, .placeholder {
+            padding: 2px;
+            width: 50px;
+            height: 20px;
+            border: 1px solid #333;
+            background: #EEE;
+        }
+        .placeholder {
+            background: #AEF;
+        }
+    </style>
+</head>
+
+<body data-ng-app="myApp" data-ng-controller="myCtrl" data-scroll>
+<div style="padding:15px">
+
+
+    <label>Id</label>
+
+    <input type="text" name="id" ng-model="newproduct.id"/>
+
+    <label>Name</label>
+
+    <input type="text" name="name" ng-model="newproduct.name"/>
+
+    <label>Description</label>
+
+    <input type="text" name="description" ng-model="newproduct.description"/>
+
+    <label>Quantity</label>
+
+    <input type="text" name="quantity" ng-model="newproduct.quantity"/>
+
+    <label>Price</label>
+
+    <input type="text" name="price" ng-model="newproduct.price"/>
+
+
+
+    <input type="hidden" ng-model="newproduct.id" />
+
+    <input type="button" value="Save" ng-click="saveRecord(newproduct)" class="btn btn-primary"/>
+
+
+
+
+
+
+    <table border="1" bordercolor="blue">
+
+
+        <tr style="color:blue">
+
+
+            <th style="width:15px">Id</th>
+            <th style="width:150px">Name</th>
+
+
+
+            <th style="width:150px">Description</th>
+
+
+
+            <th style="width:20px">Quantity</th>
+
+
+            <th style="width:10px">Price</th>
+
+
+
+            <th>Action</th>
+
+
+        </tr>
+
+
+
+        <tr style="color:pink" ng-repeat="product in products">
+
+
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+
+
+
+            <td>{{ product.price }}</td>
+
+
+
+            <td>{{ product.quantity }}</td>
+
+
+            <td>{{ product.description }}</td>
+
+
+            <td>
+
+                <a href="#" ng-click="edit(product.id)">edit</a> |
+
+                <a href="#" ng-click="delete(product.id)">delete</a>
+
+            </td>
+
+
+        </tr>
+
+
+    </table>
+</div>
+</body>
+
+</html>
