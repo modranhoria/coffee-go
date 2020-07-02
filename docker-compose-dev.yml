@@ -15,6 +15,7 @@ services:
   backend:
     build:
       context: ./coffee-service
+      dockerfile: Dockerfile-dev
     container_name: backend
     ports:
       - '8080:8080'
