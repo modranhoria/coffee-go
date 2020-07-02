@@ -1,10 +1,12 @@
 package com.arvato.coffeeservice.models;
 
-import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
@@ -17,12 +19,16 @@ public class User {
     private Long id;
 
     @Column
+    @NotBlank(message = "Name is mandatory")
     private String name;
 
     @Column
+    @Email
+    @NotBlank(message = "Email is mandatory")
     private String email;
 
     @Column
+    @NotBlank(message = "Password is mandatory")
     private String password;
 
 }
