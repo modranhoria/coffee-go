@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project builder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" data-ng-integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" data-ng-crossorigin="anonymous">
+<script type="text/javascript" src="http://cdn.jsdelivr.net/g/jquery.ui@1.10%28jquery.ui.core.min.js+jquery.ui.widget.min.js+jquery.ui.mouse.min.js+jquery.ui.sortable.min.js%29"></script>
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" data-ng-integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" data-ng-crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" data-ng-integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" data-ng-crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript" src="/js/angular-modal-service.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/modal/configuration.js"></script>
+<script type="text/javascript" src="/js/modal/saveProfile.js"></script>
+<script type="text/javascript" src="/js/modal/loadProfile.js"></script>
+<script type="text/javascript" src="/js/modal/loadProfile.js"></script>
+<script type="text/javascript" src="/js/sortable.js"></script>
+
+<style type="text/css">
+	td{
+		width: 25%;
+		padding: 5px;
+	}
+	.item, .placeholder {
+    padding: 2px;
+    width: 50px;
+    height: 20px;
+    border: 1px solid #333;
+    background: #EEE;
+	}
+	.placeholder {
+	    background: #AEF;
+	}
+</style>
+</head>
+
+<body data-ng-app="myApp" data-ng-controller="myCtrl" data-scroll>
+<div style="padding:15px">
+	<table>
+		<thead>
+			<tr>
+				<th>
+					Build this module
+				</th>
+				<th>
+					Path
+				</th>
+				<th>
+					Maven command
+				</th>
+				<th>
+					Alternative command
+				</th>
+			</tr>
+		</thead>
+		<tbody ui-sortable ng-model="list">
+		    <tr data-ng-repeat="item in list"  class="item" style="cursor: move;">
+		      	<td>
+		      		<input type="checkbox" data-ng-model="item.build" data-ng-click="check(item)">
+		      	</td>
+		      	<td>
+		      		<input width="300px" type="text" data-ng-model="item.title" size="70">
+		      	</td>
+		      	<td>
+			      	<input width="300px" type="text" data-ng-model="item.command" size="70">
+		      	</td>
+		      	<td>
+			      	<input width="300px" type="text" data-ng-model="item.alternativeCommand" size="70">
+		      	</td>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>
+					
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+<div style="padding:15px" align="right">
+	<button class="btn" data-ng-click="refresh()">Refresh</button>
+	<button class="btn" data-ng-click="saveProfile()">Save profile</button>
+	<button class="btn" data-ng-click="loadProfile()">Load profile</button>
+	<button class="btn" data-ng-click="select()"> Select</button>
+	<button class="btn" data-ng-click="build()"> Build</button>
+	<button class="btn" data-ng-click="configuration()" >Configuration</button>
+</div>
+</body>
+
+</html>
