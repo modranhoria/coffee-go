@@ -4,10 +4,21 @@ var app = angular.module('myApp',
 );
 app.controller('myCtrl', function($scope, $window, $location, $http,ModalService) {
 
+	// INSECURE! Just for testing purpose!
+	var auth = window.btoa("admin@coffee:admin")
+
+	var config = {
+		headers : {
+			'Content-Type': 'application/json',
+			"Authorization": "Basic " + auth
+		},
+		withCredentials: true
+	}
+
 	$scope.newProduct={};
 
 	$scope.loadProducts = function(){
-		$http.get("http://localhost:8080/products/all")
+		$http.get("http://localhost:8080/products/all", config)
 			.then(function(response) {
 				$scope.products = response.data;
 			});
@@ -31,11 +42,7 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 
 		var request= {product : newProduct}
 
-		var config = {
-			headers : {
-				'Content-Type': 'application/json'
-			}
-		}
+
 		$http.post('http://localhost:8080/products/product',request, config)
 			.success(function (data, status, headers, config) {
 				$scope.log = data;
