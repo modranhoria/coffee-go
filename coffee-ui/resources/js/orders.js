@@ -6,7 +6,7 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 
 	// INSECURE! Just for testing purpose!
 	var auth = window.btoa("admin@coffee:admin")
-	$scope.newProduct={};
+	$scope.newOrder={};
 
 	var config = {
 		headers : {
@@ -17,34 +17,26 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 	}
 
 
-	$scope.loadProducts = function(){
-		$http.get("http://localhost:8080/products/all", config)
+	$scope.loadorders = function(){
+		$http.get("http://localhost:8080/orders/all", config)
 			.then(function(response) {
-				$scope.products = response.data;
-			});
-	}
-
-	$scope.importProducts = function(){
-		$http.get("http://localhost:8080/products/import", config)
-			.then(function(response) {
-				$scope.products = response.data;
-				$scope.loadProducts();
+				$scope.orders = response.data;
 			});
 	}
 
 
-	$scope.loadProducts();
+	$scope.loadorders();
 	var empid = 1;
-	$scope.saveRecord = function(newProduct){
-		if(newProduct.id == null){
-			newProduct.id = empid++;
-			$scope.products.push(newProduct);
+	$scope.saveRecord = function(newOrder){
+		if(newOrder.id == null){
+			newOrder.id = empid++;
+			$scope.orders.push(newOrder);
 		}
 
-		$http.post('http://localhost:8080/products',newProduct, config)
+		$http.post('http://localhost:8080/orders',newOrder, config)
 			.success(function (data, status, headers, config) {
 				$scope.log = data;
-				$scope.loadProducts();
+				$scope.loadorders();
 			})
 			.error(function (data, status, header, config) {
 				$scope.log = "Data: " + data +
@@ -53,15 +45,15 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 					"<hr />config: " + config;
 			});
 
-		$scope.newProduct={};
+		$scope.newOrder={};
 
 	}
 	$scope.delete = function(id){
-		for(i in $scope.products){
-			if($scope.products[i].id == id){
-				$http.delete('http://localhost:8080/products/'+id, config)
+		for(i in $scope.orders){
+			if($scope.orders[i].id == id){
+				$http.delete('http://localhost:8080/orders/'+id, config)
 					.success(function (data, status, headers, config) {
-						$scope.products.splice(i,1);
+						$scope.orders.splice(i,1);
 						$scope.log = data;
 					})
 					.error(function (data, status, header, config) {
@@ -70,14 +62,14 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 							"<hr />headers: " + header +
 							"<hr />config: " + config;
 					});
-				$scope.newProduct={};
+				$scope.newOrder={};
 			}
 		}
 	}
 	$scope.edit = function(id){
-		for(i in $scope.products){
-			if($scope.products[i].id == id){
-				$scope.newProduct = angular.copy($scope.products[i]);
+		for(i in $scope.orders){
+			if($scope.orders[i].id == id){
+				$scope.newOrder = angular.copy($scope.orders[i]);
 			}
 		}
 	}

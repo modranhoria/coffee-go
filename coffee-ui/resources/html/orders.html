@@ -16,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" data-ng-integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" data-ng-crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script type="text/javascript" src="/js/angular-modal-service.js"></script>
-    <script type="text/javascript" src="/js/products.js"></script>
+    <script type="text/javascript" src="/js/orders.js"></script>
     <script type="text/javascript" src="/js/modal/configuration.js"></script>
     <script type="text/javascript" src="/js/modal/saveProfile.js"></script>
     <script type="text/javascript" src="/js/modal/loadProfile.js"></script>
@@ -46,28 +46,27 @@
 
 
 
-    <label>Name</label>
+    <label>User Name</label>
 
-    <input type="text" name="name" ng-model="newProduct.name"/>
+    <input type="text" name="name" ng-model="newOrder.name"/>
 
-    <label>Description</label>
+    <label>User id</label>
 
-    <input type="text" name="description" ng-model="newProduct.description"/>
+    <input type="text" name="description" ng-model="newOrder.user.id"/>
 
-    <label>Quantity</label>
+    <label>createdAt</label>
 
-    <input type="text" name="quantity" ng-model="newProduct.quantity"/>
+    <input type="text" name="quantity" ng-model="newOrder.createdAt"/>
 
-    <label>Price</label>
+    <label>processedBy</label>
 
-    <input type="text" name="price" ng-model="newProduct.price"/>
+    <input type="text" name="price" ng-model="newOrder.processedBy.name"/>
 
 
 
-    <input type="hidden" ng-model="newProduct.id" />
+    <input type="hidden" ng-model="newOrder.id" />
 
-    <input type="button" value="Save" ng-click="saveRecord(newProduct)" class="btn btn-primary"/>
-    <input type="button" value="Products imports" ng-click="importProducts()" class="btn btn-primary"/>
+    <input type="button" value="Save" ng-click="saveRecord(newOrder)" class="btn btn-primary"/>
 
 
 
@@ -81,29 +80,38 @@
 
 
             <th style="width:15px">Id</th>
-            <th style="width:150px">Name</th>
-            <th style="width:150px">Description</th>
-            <th style="width:10px">Quantity</th>
-            <th style="width:10px">Price</th>
+            <th style="width:150px">User</th>
+            <th style="width:150px">createdAt</th>
+            <th style="width:10px">processedBy</th>
+            <th style="width:10px">processedTime</th>
+            <th style="width:10px">status</th>
+            <th style="width:10px">orders</th>
             <th>Action</th>
         </tr>
 
 
 
-        <tr style="color:pink" ng-repeat="product in products">
+        <tr style="color:pink" ng-repeat="order in orders">
 
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.price }}</td>
+            <td>{{ order.id }}</td>
+            <td>{{ order.user.name }}</td>
+            <td>{{ order.createdAt }}</td>
+            <td>{{ order.processedBy }}</td>
+            <td>{{ order.processedTime }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+                <tr style="color:pink" ng-repeat="item in order.orderItems">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                </tr>
+            </td>
 
 
             <td>
 
-                <a href="#" ng-click="edit(product.id)">edit</a> |
+                <a href="#" ng-click="edit(order.id)">edit</a> |
 
-                <a href="#" ng-click="delete(product.id)">delete</a>
+                <a href="#" ng-click="delete(order.id)">delete</a>
 
             </td>
 
