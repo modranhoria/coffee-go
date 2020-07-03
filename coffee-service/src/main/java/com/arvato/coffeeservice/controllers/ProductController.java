@@ -1,12 +1,13 @@
 package com.arvato.coffeeservice.controllers;
 
-import com.arvato.coffeeservice.models.Product;
-import com.arvato.coffeeservice.repositories.ProductRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import com.arvato.coffeeservice.models.Product;
+import com.arvato.coffeeservice.repositories.ProductRepository;
 
 @RestController
 @RequestMapping("products")
@@ -19,12 +20,12 @@ public class ProductController {
         return productRepository.findAll();
     }
 
-    @PostMapping("/product")
+    @PostMapping("")
     public Product createProduct(@RequestBody Product product) {
         return productRepository.saveAndFlush(product);
     }
 
-    @PutMapping("/product/{id}")
+    @PutMapping("/{id}")
     public Product updateProductById(@RequestBody Product product, @PathVariable("id") Long productId) {
         Optional<Product> productById = productRepository.findById(productId);
 
@@ -38,7 +39,7 @@ public class ProductController {
         return productRepository.saveAndFlush(productById.get());
     }
 
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable("id") Long productId) {
         productRepository.deleteById(productId);
     }
