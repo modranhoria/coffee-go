@@ -80,8 +80,8 @@
 
 
             <th style="width:15px">Id</th>
-            <th style="width:150px">User</th>
-            <th style="width:150px">createdAt</th>
+            <th style="width:50px">User</th>
+            <th style="width:50px">createdAt</th>
             <th style="width:10px">processedBy</th>
             <th style="width:10px">processedTime</th>
             <th style="width:10px">status</th>
@@ -96,15 +96,10 @@
             <td>{{ order.id }}</td>
             <td>{{ order.user.name }}</td>
             <td>{{ order.createdAt }}</td>
-            <td>{{ order.processedBy }}</td>
+            <td>{{ order.processedBy.name }}</td>
             <td>{{ order.processedTime }}</td>
             <td>{{ order.status }}</td>
-            <td>
-                <tr style="color:pink" ng-repeat="item in order.orderItems">
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.price }}</td>
-                </tr>
-            </td>
+            <td>{{ order.orderItems }}</td>
 
 
             <td>

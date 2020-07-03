@@ -63,6 +63,7 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 					.success(function (data, status, headers, config) {
 						$scope.products.splice(i,1);
 						$scope.log = data;
+						$scope.loadProducts();
 					})
 					.error(function (data, status, header, config) {
 						$scope.log = "Data: " + data +

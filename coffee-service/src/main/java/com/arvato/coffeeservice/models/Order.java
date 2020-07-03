@@ -1,16 +1,15 @@
 package com.arvato.coffeeservice.models;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.*;
-
 import com.arvato.coffeeservice.utils.OrderStatus;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -38,7 +37,7 @@ public class Order {
 
     @Column
     private OrderStatus status;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItems> orderItems = new ArrayList<>();
 
