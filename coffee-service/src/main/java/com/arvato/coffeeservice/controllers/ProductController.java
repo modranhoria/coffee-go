@@ -1,8 +1,11 @@
 package com.arvato.coffeeservice.controllers;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import com.arvato.coffeeservice.load.ProductLoader;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +14,13 @@ import com.arvato.coffeeservice.repositories.ProductRepository;
 
 @RestController
 @RequestMapping("products")
+@Slf4j
 public class ProductController {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductLoader productLoader;
 
     @GetMapping("/all")
     public List<Product> getAllProducts() {
@@ -42,6 +49,16 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable("id") Long productId) {
         productRepository.deleteById(productId);
+    }
+
+    @GetMapping("/import")
+    public void importProducts() throws IOException {
+        productLoader.importProducts()
+                .thenAcceptAsync(products -> {
+                            productRepository.saveAll(products);
+                            log.debug("Imported {} products", products.size());
+                        }
+                );
     }
 
 }
