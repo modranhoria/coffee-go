@@ -6,6 +6,7 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 
 	// INSECURE! Just for testing purpose!
 	var auth = window.btoa("admin@coffee:admin")
+	$scope.newProduct={};
 
 	var config = {
 		headers : {
@@ -15,7 +16,6 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 		withCredentials: true
 	}
 
-	$scope.newProduct={};
 
 	$scope.loadProducts = function(){
 		$http.get("http://localhost:8080/products/all", config)
@@ -31,21 +31,12 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 		if(newProduct.id == null){
 			newProduct.id = empid++;
 			$scope.products.push(newProduct);
-		}else{
-			for(i in $scope.products){
-				if($scope.products[i].id == newProduct.id){
-					$scope.products[i] = newProduct;
-				}
-			}
 		}
 
-
-		var request= {product : newProduct}
-
-
-		$http.post('http://localhost:8080/products/product',request, config)
+		$http.post('http://localhost:8080/products',newProduct, config)
 			.success(function (data, status, headers, config) {
 				$scope.log = data;
+				$scope.loadProducts();
 			})
 			.error(function (data, status, header, config) {
 				$scope.log = "Data: " + data +
@@ -60,11 +51,6 @@ app.controller('myCtrl', function($scope, $window, $location, $http,ModalService
 	$scope.delete = function(id){
 		for(i in $scope.products){
 			if($scope.products[i].id == id){
-				var config = {
-					headers : {
-						'Content-Type': 'application/json'
-					}
-				}
 				$http.delete('http://localhost:8080/products/'+id, config)
 					.success(function (data, status, headers, config) {
 						$scope.products.splice(i,1);

@@ -47,29 +47,29 @@
 
     <label>Id</label>
 
-    <input type="text" name="id" ng-model="newproduct.id"/>
+    <input type="text" name="id" ng-model="newProduct.id"/>
 
     <label>Name</label>
 
-    <input type="text" name="name" ng-model="newproduct.name"/>
+    <input type="text" name="name" ng-model="newProduct.name"/>
 
     <label>Description</label>
 
-    <input type="text" name="description" ng-model="newproduct.description"/>
+    <input type="text" name="description" ng-model="newProduct.description"/>
 
     <label>Quantity</label>
 
-    <input type="text" name="quantity" ng-model="newproduct.quantity"/>
+    <input type="text" name="quantity" ng-model="newProduct.quantity"/>
 
     <label>Price</label>
 
-    <input type="text" name="price" ng-model="newproduct.price"/>
+    <input type="text" name="price" ng-model="newProduct.price"/>
 
 
 
-    <input type="hidden" ng-model="newproduct.id" />
+    <input type="hidden" ng-model="newProduct.id" />
 
-    <input type="button" value="Save" ng-click="saveRecord(newproduct)" class="btn btn-primary"/>
+    <input type="button" value="Save" ng-click="saveRecord(newProduct)" class="btn btn-primary"/>
 
 
 
@@ -84,43 +84,21 @@
 
             <th style="width:15px">Id</th>
             <th style="width:150px">Name</th>
-
-
-
             <th style="width:150px">Description</th>
-
-
-
-            <th style="width:20px">Quantity</th>
-
-
+            <th style="width:10px">Quantity</th>
             <th style="width:10px">Price</th>
-
-
-
             <th>Action</th>
-
-
         </tr>
 
 
 
         <tr style="color:pink" ng-repeat="product in products">
 
-
             <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
-
-
-
-            <td>{{ product.price }}</td>
-
-
-
-            <td>{{ product.quantity }}</td>
-
-
             <td>{{ product.description }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.price }}</td>
 
 
             <td>
