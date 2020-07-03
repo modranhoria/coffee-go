@@ -6,8 +6,6 @@ services:
     container_name: frontend
     ports:
       - "80:80"
-    depends_on:
-      - backend
     volumes:
       - ./coffee-ui/resources:/usr/share/nginx/html
     networks:
