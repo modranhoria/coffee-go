@@ -2,4 +2,7 @@ FROM openjdk:11-jdk
 COPY ./target/coffee-service-0.0.1-SNAPSHOT.jar /usr/src/myapp/app.jar
 WORKDIR /usr/src/myapp
 
-CMD ["java", "-jar", "app.jar"]
+EXPOSE 5005
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005","-jar", "app.jar"]
+
+#CMD ["java", "-jar", "app.jar"]
