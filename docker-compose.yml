@@ -36,7 +36,14 @@ services:
       - '3306:3306'
     networks:
       - backend-network
-
+  mail:
+    image: "mailhog/mailhog"
+    container_name: mail
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+    networks:
+      - backend-network
 networks:
   backend-network:
   frontend-network:
